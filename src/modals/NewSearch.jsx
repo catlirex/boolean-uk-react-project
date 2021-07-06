@@ -25,19 +25,30 @@ function NewSearch({ className }) {
   const closeModal = useStore((store) => store.closeModal);
   const getSearchResult = useStore((state) => state.getSearchResult);
   const history = useHistory();
+  const clearSearchResult = useStore((state) => state.clearSearchResult);
+  const updateSearchValue = useStore((state) => state.updateSearchValue);
 
   function handleOnChange(e) {
     if (e.target.name === "from") {
       setFromPostCode(e.target.value.toUpperCase());
-      setFromPostCodeIsValid(isValid(e.target.value.toUpperCase()));
+      setFromPostCodeIsValid(
+        isValid(e.target.value.split(" ").join("").toUpperCase())
+      );
     } else {
       setToPostCode(e.target.value.toUpperCase());
-      setToPostCodeIsValid(isValid(e.target.value.toUpperCase()));
+      setToPostCodeIsValid(
+        isValid(e.target.value.split(" ").join("").toUpperCase())
+      );
     }
   }
 
   function handleSubmit(e, fromPostCode, toPostCode) {
     e.preventDefault();
+    clearSearchResult();
+    updateSearchValue(
+      fromPostCode.split(" ").join(""),
+      toPostCode.split(" ").join("")
+    );
     getSearchResult(
       fromPostCode.split(" ").join(""),
       toPostCode.split(" ").join("")

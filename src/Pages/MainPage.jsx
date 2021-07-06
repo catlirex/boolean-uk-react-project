@@ -9,6 +9,11 @@ const ActionAside = styled.aside`
   grid-template-rows: 100px auto auto 1fr;
 `;
 
+function splitDurationToNumberArray(duration) {
+  let numArray = duration.split(":");
+  return numArray.map((target) => Number(target));
+}
+
 export default function MainPage() {
   const setModal = useStore((state) => state.setModal);
 

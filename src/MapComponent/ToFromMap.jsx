@@ -29,6 +29,7 @@ export default function ToFromMap() {
   }, [searchResult]);
 
   if (searchResult.length === 0 || !firstCoordinate) return <h1>Loading...</h1>;
+
   const polyline = [firstCoordinate, lastCoordinate];
 
   return (

@@ -17,11 +17,11 @@ export default function App() {
           <MainPage />
         </Route>
 
-        <Route path="/search/:searchPath/:path">
+        <Route path="/search/:searchPath/:resultIndex">
           <JourneyDetailPage />
         </Route>
 
-        <Route path="/search/:postcode">
+        <Route path="/search/:searchPath">
           <SearchResultPage />
         </Route>
 
