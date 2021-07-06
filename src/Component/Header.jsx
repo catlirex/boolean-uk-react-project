@@ -5,6 +5,7 @@ const StyleHeader = styled.header`
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
+  margin: 20px 50px;
 `;
 
 const AccountActionBar = styled.div`
@@ -22,6 +23,7 @@ export default function Header() {
         <h2>Catherine</h2>
         <button>Switch User</button>
         <button>Logout</button>
+        <button>Login</button>
         <button>NewUser</button>
       </AccountActionBar>
     </StyleHeader>

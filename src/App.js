@@ -2,7 +2,10 @@ import "./styles.css";
 import React from "react";
 import Header from "./Component/Header";
 import { Route, Redirect, Switch } from "react-router-dom";
-import MainNoLoginPage from "./Pages/MainNoLoginPage";
+import MainPage from "./Pages/MainPage";
+import SearchResultPage from "./Pages/SearchResultPage";
+import JourneyDetailPage from "./Pages/JourneyDetailPage";
+import ModalContainer from "./modals/ModalContainer";
 
 export default function App() {
   return (
@@ -11,11 +14,15 @@ export default function App() {
 
       <Switch>
         <Route path="/" exact>
-          <MainNoLoginPage />
+          <MainPage />
+        </Route>
+
+        <Route path="/search/:searchPath/:path">
+          <JourneyDetailPage />
         </Route>
 
         <Route path="/search/:postcode">
-          <h3>Search result</h3>
+          <SearchResultPage />
         </Route>
 
         <Route path="/search/">
@@ -30,6 +37,7 @@ export default function App() {
           <h3>Error 404</h3>
         </Route>
       </Switch>
+      <ModalContainer />
     </>
   );
 }
