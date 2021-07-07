@@ -2,6 +2,8 @@ import useStore from "../store";
 import styled from "styled-components";
 import { splitDurationToNumberArray } from "../helperFunction";
 import { useHistory } from "react-router-dom";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import { MODE_IMAGE } from "../consistent";
 
 const ResultCard = styled.li`
   border: 1px rgb(177, 255, 229) solid;
@@ -38,6 +40,8 @@ const ResultCard = styled.li`
   .path-container {
     display: grid;
     grid-auto-flow: column;
+    justify-content: flex-start;
+
     padding-bottom: 10px;
     align-items: center;
   }
@@ -50,43 +54,21 @@ const ResultCard = styled.li`
   }
 `;
 
-const MODE_IMAGE = {
-  foot: "/assets/walkman.png",
-  bus: "/assets/Buses.png",
-  overground: "/assets/Overground.png",
-  dlr: "/assets/DLR.png",
-  train: "/assets/Train.png",
-
-  Northern: "/assets/Northern.png",
-  Central: "/assets/Central.png",
-  Circle: "/assets/Circle.png",
-  District: "/assets/District.png",
-  Jubilee: "/assets/Jubilee.png",
-  Metropolitan: "/assets/Metropolitan.png",
-  Piccadilly: "/assets/Piccadilly.png",
-  Victoria: "/assets/Victoria.png",
-  Bakerloo: "/assets/Bakerloo.png",
-  "Hammersmith & City": "/assets/HammerSmith_City.png",
-  "Waterloo & City": "/assets/Waterloo_City.png",
-};
-
 export default function SearchResultCard({ result, index, searchPath }) {
   const searchResult = useStore((state) => state.searchResult);
   let durationArray = splitDurationToNumberArray(result.duration);
   const history = useHistory();
 
   function handleOnClick() {
-    history.push(`/search/${searchPath}/result-${index}`);
+    history.push(`/search/${searchPath}/${index}`);
   }
   return (
     <ResultCard onClick={() => handleOnClick()}>
       <div>
         <div className="path-container">
           {result.route_parts.map((part, index) => (
-            <>
-              {index !== 0 ? (
-                <img height="10" src="/assets/right-arrow.png" />
-              ) : null}
+            <div key={"path" + index}>
+              {index !== 0 ? <ArrowRightIcon /> : null}
               <img
                 className="path-icon"
                 src={
@@ -95,7 +77,7 @@ export default function SearchResultCard({ result, index, searchPath }) {
                     : MODE_IMAGE[part.mode]
                 }
               />
-            </>
+            </div>
           ))}
         </div>
 

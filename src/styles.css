@@ -17,3 +17,16 @@ ul {
   width: 100%;
   height: 100%;
 }
+
+.auto-col {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}

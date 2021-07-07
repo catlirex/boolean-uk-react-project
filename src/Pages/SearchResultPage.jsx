@@ -3,12 +3,19 @@ import styled from "styled-components";
 import ToFromMap from "../MapComponent/ToFromMap";
 import useStore from "../store";
 import SearchResultCard from "../Component/SearchResultCard";
-import { Button } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import { useHistory, useParams } from "react-router-dom";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import HomeIcon from "@material-ui/icons/Home";
 
 const SearchAside = styled.aside`
   height: 80vh;
-  margin-right: 10px;
+
+  padding: 10px;
+  position: fixed;
+  overflow: scroll;
+  left: 20px;
+  width: 35vw;
 
   h2 {
     padding: 10px 0;
@@ -24,6 +31,11 @@ const SearchAside = styled.aside`
     display: grid;
     grid-auto-flow: column;
     gap: 5px;
+  }
+  .result-header {
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    padding: 10px;
   }
 `;
 
@@ -50,7 +62,14 @@ export default function SearchResultPage() {
     <Main>
       <SearchAside>
         <div>
-          <h2>Search Result {`(${searchResult.length})`}</h2>
+          <div className="result-header">
+            <h2>Search Result {`(${searchResult.length})`}</h2>
+
+            <IconButton aria-label="refresh" disabled>
+              <RefreshIcon />
+            </IconButton>
+          </div>
+
           <p>From: {searchResult[0].route_parts[0].from_point_name}</p>
           <p>
             To:{" "}
@@ -61,6 +80,7 @@ export default function SearchResultPage() {
             }
           </p>
         </div>
+
         <ul className="result-list-container">
           {searchResult.map((result, index) => (
             <SearchResultCard
@@ -74,8 +94,9 @@ export default function SearchResultPage() {
 
         <nav>
           <Button variant="contained" onClick={() => history.push("/")}>
-            Back to Home
+            <HomeIcon />
           </Button>
+
           <Button variant="contained" onClick={() => setModal("newSearch")}>
             New Search
           </Button>
@@ -84,6 +105,7 @@ export default function SearchResultPage() {
           </Button>
         </nav>
       </SearchAside>
+      <div></div>
       <ToFromMap />
     </Main>
   );

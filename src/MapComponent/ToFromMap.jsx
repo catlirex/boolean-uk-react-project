@@ -13,6 +13,10 @@ export default function ToFromMap() {
   const searchResult = useStore((state) => state.searchResult);
   const [firstCoordinate, setFirstCoordinate] = useState(null);
   const [lastCoordinate, setLastCoordinate] = useState(null);
+  const updateMapCenterCoordinates = useStore(
+    (state) => state.updateMapCenterCoordinates
+  );
+  const mapCenterCoordinates = useStore((state) => state.mapCenterCoordinates);
 
   useEffect(() => {
     if (searchResult.length === 0) return;
@@ -28,26 +32,38 @@ export default function ToFromMap() {
     );
   }, [searchResult]);
 
-  if (searchResult.length === 0 || !firstCoordinate) return <h1>Loading...</h1>;
+  useEffect(
+    () => {
+      if (!firstCoordinate || !lastCoordinate) return;
+      let centerLat = (firstCoordinate[0] + lastCoordinate[0]) / 2;
+      let centerLot = (firstCoordinate[1] + lastCoordinate[1]) / 2;
+      console.log([centerLat, centerLot]);
+      updateMapCenterCoordinates([centerLat, centerLot]);
+    },
+    [firstCoordinate, lastCoordinate],
+    updateMapCenterCoordinates
+  );
 
-  const polyline = [firstCoordinate, lastCoordinate];
+  if (
+    searchResult.length === 0 ||
+    !firstCoordinate ||
+    mapCenterCoordinates.length === 0
+  )
+    return <h1>Loading...</h1>;
 
   return (
     <MapContainer
-      center={[
-        (polyline[0][0] + polyline[1][0]) / 2,
-        (polyline[0][1] + polyline[1][1]) / 2,
-      ]}
+      center={mapCenterCoordinates}
       zoom={setZoomScale(searchResult[0].duration)}
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={polyline[0]}>
+      <Marker position={firstCoordinate}>
         <Popup>{searchResult[0].route_parts[0].from_point_name}</Popup>
       </Marker>
-      <Marker position={polyline[1]}>
+      <Marker position={lastCoordinate}>
         <Popup>
           {
             searchResult[0].route_parts[searchResult[0].route_parts.length - 1]
@@ -55,7 +71,7 @@ export default function ToFromMap() {
           }
         </Popup>
       </Marker>
-      <Polyline positions={polyline} />
+      <Polyline positions={[firstCoordinate, lastCoordinate]} />
     </MapContainer>
   );
 }
