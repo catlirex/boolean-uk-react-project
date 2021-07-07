@@ -108,22 +108,4 @@ export default styled(NewSearch)`
     display: grid;
     grid-gap: 10px;
   }
-
-  .modal-title {
-    text-align: center;
-  }
-
-  .create-user {
-    text-align: center;
-    justify-self: center;
-
-    padding: 0.5rem 1rem;
-
-    font-weight: 500;
-    letter-spacing: 0.1rem;
-    color: var(--white);
-
-    background-color: var(--background-stripe);
-    border-radius: 3px;
-  }
 `;

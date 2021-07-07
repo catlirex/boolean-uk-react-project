@@ -4,6 +4,7 @@ import { splitDurationToNumberArray } from "../helperFunction";
 import MapIcon from "@material-ui/icons/Map";
 import { IconButton } from "@material-ui/core";
 import { PATH_COLOR } from "../consistent";
+import useStore from "../store";
 
 const Card = styled.li`
   border-bottom: 1px solid lightgray;
@@ -24,14 +25,14 @@ const Card = styled.li`
   }
   .tube-station {
     background-color: rgb(220, 220, 220, 0.3);
-    padding: 2px 0;
+    padding: 2px 5px;
   }
   .toward-box {
     width: 5px;
     height: 20px;
     border-radius: 2px;
     background-color: rgb(72, 72, 72);
-    margin: 3px 12px;
+    margin: 3px 5px;
   }
 
   .tube-line {
@@ -42,6 +43,20 @@ const Card = styled.li`
 
 export default function TravelPartCard({ part }) {
   let durationArray = splitDurationToNumberArray(part.duration);
+  const updateMapCenterCoordinates = useStore(
+    (state) => state.updateMapCenterCoordinates
+  );
+
+  function zoomMap() {
+    console.log([
+      part.coordinates[0],
+      part.coordinates[part.coordinates.length - 1],
+    ]);
+    updateMapCenterCoordinates([
+      part.coordinates[0],
+      part.coordinates[part.coordinates.length - 1],
+    ]);
+  }
   return (
     <Card>
       <div className="auto-col space-between"></div>
@@ -55,11 +70,16 @@ export default function TravelPartCard({ part }) {
               </span>
               <span> mins</span>
             </div>
-            <IconButton aria-label="view-map">
+            <IconButton
+              aria-label="view-map"
+              onClick={() => {
+                zoomMap();
+              }}
+            >
               <MapIcon fontSize="small" />
             </IconButton>
           </div>
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -69,9 +89,10 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p style={PATH_COLOR[part.line_name]}>{part.from_point_name}</p>
+            <b>{part.departure_time}</b>
           </div>
           <div className="toward-box"></div>
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -81,6 +102,7 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p style={PATH_COLOR[part.line_name]}>{part.to_point_name}</p>
+            <b>{part.arrival_time}</b>
           </div>
         </div>
       ) : null}
@@ -103,7 +125,7 @@ export default function TravelPartCard({ part }) {
             {part.line_name} Line - - - {part.destination}
           </p>
 
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -113,9 +135,10 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p style={PATH_COLOR[part.line_name]}>{part.from_point_name}</p>
+            <b>{part.departure_time}</b>
           </div>
           <div className="toward-box"></div>
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -125,6 +148,7 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p style={PATH_COLOR[part.line_name]}>{part.to_point_name}</p>
+            <b>{part.arrival_time}</b>
           </div>
         </div>
       ) : null}
@@ -146,7 +170,7 @@ export default function TravelPartCard({ part }) {
           </div>
 
           <p className="tube-line">Direction : {part.destination}</p>
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -156,9 +180,10 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p style={PATH_COLOR[part.line_name]}>{part.from_point_name}</p>
+            <b>{part.departure_time}</b>
           </div>
           <div className="toward-box"></div>
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -168,6 +193,7 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p style={PATH_COLOR[part.line_name]}>{part.to_point_name}</p>
+            <b>{part.arrival_time}</b>
           </div>
         </div>
       ) : null}
@@ -188,7 +214,7 @@ export default function TravelPartCard({ part }) {
           <p className="tube-line">
             {part.line_name} - - - {part.destination}
           </p>
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -198,9 +224,10 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p>{part.from_point.place.name}</p>
+            <b>{part.departure_time}</b>
           </div>
           <div className="toward-box"></div>
-          <div className="align-center auto-col tube-station">
+          <div className="space-between align-center auto-col tube-station">
             <img
               className="path-icon"
               src={
@@ -210,6 +237,7 @@ export default function TravelPartCard({ part }) {
               }
             />
             <p>{part.to_point.place.name}</p>
+            <b>{part.arrival_time}</b>
           </div>
         </div>
       ) : null}

@@ -2,10 +2,14 @@ import styled from "styled-components";
 
 import useStore from "../store";
 import NewSearch from "./NewSearch";
+import Login from "./Login";
+import NewUser from "./NewUser";
 
 const modals = {
   "": null,
   newSearch: NewSearch,
+  login: Login,
+  newUser: NewUser,
 };
 
 function ModalContainer({ className }) {

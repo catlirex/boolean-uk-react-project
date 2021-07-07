@@ -1,6 +1,25 @@
 export const createAPILink = (fromPoint, toPoint) =>
   `https://transportapi.com/v3/uk/public/journey/from/postcode:${fromPoint}/to/postcode:${toPoint}.json?app_id=7558d875&app_key=13aaeb933ff1d107d096127db22eccf7&service=tfl`;
 
+const LOCAL_DB = "http://localhost:4000";
+
+export function getUser(id) {
+  return fetch(`${LOCAL_DB}/users/${id}`).then((response) => response.json());
+}
+
+export function postUser(newUserDetail) {
+  return fetch(`${LOCAL_DB}/users/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUserDetail),
+  }).then((response) => {
+    if (!response.ok) return alert("Username existed");
+    return response.json();
+  });
+}
+
 export const MODE_IMAGE = {
   foot: "/assets/walkman.png",
   bus: "/assets/Buses.png",
