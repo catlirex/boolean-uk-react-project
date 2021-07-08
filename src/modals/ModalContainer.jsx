@@ -4,12 +4,14 @@ import useStore from "../store";
 import NewSearch from "./NewSearch";
 import Login from "./Login";
 import NewUser from "./NewUser";
+import AddBookmark from "./AddBookmark";
 
 const modals = {
   "": null,
   newSearch: NewSearch,
   login: Login,
   newUser: NewUser,
+  bookmark: AddBookmark,
 };
 
 function ModalContainer({ className }) {

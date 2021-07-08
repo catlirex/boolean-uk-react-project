@@ -77,7 +77,9 @@ function NewSearch({ className }) {
           autoComplete="off"
           defaultValue={fromPostCode}
           helperText={
-            !fromPostCodeIsValid ? "Incorrect Postcode" : "Example: SE17PB"
+            !fromPostCodeIsValid
+              ? "Incorrect Input, sample: SE17PB"
+              : "Example: SE17PB"
           }
           variant="outlined"
           onChange={(e) => handleOnChange(e)}
@@ -91,7 +93,9 @@ function NewSearch({ className }) {
           autoComplete="off"
           defaultValue={toPostCode}
           helperText={
-            !toPostCodeIsValid ? "Incorrect Postcode" : "Example: SE17PB"
+            !toPostCodeIsValid
+              ? "Incorrect Input, sample: SE17PB"
+              : "Example: SE17PB"
           }
           variant="outlined"
           onChange={(e) => handleOnChange(e)}

@@ -23,14 +23,24 @@ export default function SearchHistory() {
             <em>No history, search one</em>
           ) : (
             loginUser.history.map((record, index) => (
-              <SearchHistoryCard record={record} key={index} index={index} />
+              <SearchHistoryCard
+                record={record}
+                key={index}
+                index={index}
+                renderFrom={"history"}
+              />
             ))
           )
         ) : noLoginSearchHistory.length === 0 ? (
           <em>No history, search one</em>
         ) : (
           noLoginSearchHistory.map((record, index) => (
-            <SearchHistoryCard record={record} key={index} index={index} />
+            <SearchHistoryCard
+              record={record}
+              key={index}
+              index={index}
+              renderFrom={"history"}
+            />
           ))
         )}
       </SearchHistoryList>

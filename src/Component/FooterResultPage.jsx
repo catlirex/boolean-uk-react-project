@@ -17,7 +17,7 @@ export default function FooterResultPage() {
   const loginUser = useAcStore((state) => state.loginUser);
   const searchResult = useStore((state) => state.searchResult);
   const searchValue = useStore((state) => state.searchValue);
-  const addSaveJourney = useAcStore((state) => state.addSaveJourney);
+  const updateJourney = useAcStore((state) => state.updateJourney);
 
   function handleOnClick() {
     let newJourney = {
@@ -28,7 +28,9 @@ export default function FooterResultPage() {
       toPostcode: searchValue.toPostcode,
     };
 
-    addSaveJourney(newJourney);
+    let allJourney = [newJourney, ...loginUser["saved-journey"]];
+
+    updateJourney(allJourney);
   }
 
   return (

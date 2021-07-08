@@ -43,6 +43,8 @@ const useStore = create((set, get) => ({
     set({
       noLoginSearchHistory: [newHistory, ...get().noLoginSearchHistory],
     }),
+  delLoginSearchHistory: (historyArray) =>
+    set({ noLoginSearchHistory: historyArray }),
 }));
 
 export default useStore;

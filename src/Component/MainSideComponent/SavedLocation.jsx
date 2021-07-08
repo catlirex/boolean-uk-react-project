@@ -122,12 +122,12 @@ export default function SavedLocation() {
                   })}
                 </div>
                 <div className="auto-col btn-bar">
-                  <DarkSquareButton variant="contained" color="default">
+                  <DarkSquareButton
+                    variant="contained"
+                    color="default"
+                    onClick={() => setModal("bookmark")}
+                  >
                     <AddIcon fontSize="small" />
-                  </DarkSquareButton>
-
-                  <DarkSquareButton variant="contained" color="default">
-                    <EditIcon fontSize="small" />
                   </DarkSquareButton>
                 </div>
               </>
@@ -135,16 +135,28 @@ export default function SavedLocation() {
               <>
                 <em>No bookmark yet</em>
                 <div className="auto-col btn-bar">
-                  <DarkSquareButton variant="contained" color="default">
+                  <DarkSquareButton
+                    variant="contained"
+                    color="default"
+                    onClick={() => setModal("bookmark")}
+                  >
                     <AddIcon fontSize="small" />
                     <HomeOutlinedIcon />
                   </DarkSquareButton>
-                  <DarkSquareButton variant="contained" color="default">
+                  <DarkSquareButton
+                    variant="contained"
+                    color="default"
+                    onClick={() => setModal("bookmark")}
+                  >
                     <AddIcon fontSize="small" />
                     <WorkIcon />
                   </DarkSquareButton>
 
-                  <DarkSquareButton variant="contained" color="default">
+                  <DarkSquareButton
+                    variant="contained"
+                    color="default"
+                    onClick={() => setModal("bookmark")}
+                  >
                     <AddIcon />
                   </DarkSquareButton>
                 </div>
@@ -157,7 +169,12 @@ export default function SavedLocation() {
 
           {Object.keys(loginUser["saved-journey"]).length ? (
             loginUser["saved-journey"].map((record, index) => (
-              <SearchHistoryCard record={record} key={index} index={index} />
+              <SearchHistoryCard
+                record={record}
+                key={index}
+                index={index}
+                renderFrom={"journey"}
+              />
             ))
           ) : (
             <>

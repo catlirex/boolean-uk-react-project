@@ -32,19 +32,17 @@
       "id": "test1",
       "name": "test1",
       "password": "test1",
-      "saved-place": {},
+      "saved-place": {
+        "home": "HA89AR",
+        "sd": "HA89AR",
+        "done": "HH89SD"
+      },
       "saved-journey": [
         {
-          "from": "specified point, Victoria (London)",
-          "to": "1 Lee Conservancy Road, Hackney",
-          "fromPostcode": "SW1A1AA",
-          "toPostcode": "E95HW"
-        },
-        {
           "from": "1 Elmer Gardens, Edgware",
-          "to": "Riverside Walk, Waterloo (London)",
+          "to": "72 The Broadway, Mill Hill",
           "fromPostcode": "HA89AR",
-          "toPostcode": "SE17PB"
+          "toPostcode": "NW73TG"
         }
       ],
       "history": []

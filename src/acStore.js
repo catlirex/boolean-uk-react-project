@@ -23,13 +23,19 @@ const useAcStore = create((set, get) => ({
       set({ loginUser: data })
     );
   },
+  updateHistory: (newHistory) => {
+    patchUpdateUser(get().loginUser.id, { history: newHistory }).then((data) =>
+      set({ loginUser: data })
+    );
+  },
+  updateJourney: (newJourney) => {
+    patchUpdateUser(get().loginUser.id, { "saved-journey": newJourney }).then(
+      (data) => set({ loginUser: data })
+    );
+  },
 
-  addSaveJourney: (newJourney) => {
-    console.log("newJourney", newJourney);
-    let allJourney = [newJourney, ...get().loginUser["saved-journey"]];
-    console.log("allJourney", allJourney);
-
-    patchUpdateUser(get().loginUser.id, { "saved-journey": allJourney }).then(
+  addSavePlace: (updatedObj) => {
+    patchUpdateUser(get().loginUser.id, { "saved-place": updatedObj }).then(
       (data) => set({ loginUser: data })
     );
   },

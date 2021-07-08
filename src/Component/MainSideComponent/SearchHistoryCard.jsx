@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import useAcStore from "../../acStore";
 import useStore from "../../store";
 
 const HistoryCard = styled.li`
@@ -11,6 +12,7 @@ const HistoryCard = styled.li`
   padding 10px;
   border-radius:5px;
   box-shadow: 0px 1px 5px 1px lightgray;
+  position: relative;
 
 
   h3{
@@ -24,16 +26,57 @@ const HistoryCard = styled.li`
     background-color: rgb(72, 72, 72);
     margin: 3px 3px;
   }
+
+  
+
+  .del-card {
+    
+    position: absolute;
+
+    top: -5px;
+    right: -5px;
+
+    justify-self: end;
+    border-radius: 50%;
+    
+    background-color: lightgray;
+
+    width: 20px;
+    height: 20px;
+
+    font-size: 1rem;
+    color: gray;
+
+    display: grid;
+    place-content: center;
+    visibility:hidden;
+    opacity:0;
+    transition: 0.5s cubic-bezier(.8,-0.29,.96,.56);
+  }
+
+  &:hover .del-card{
+    visibility:  ${(props) => (props.loggedIn ? "visible" : "hidden")};
+    opacity: ${(props) => (props.loggedIn ? "1" : "0")};
+  }
 `;
 
-export default function SearchHistoryCard({ record, index }) {
-  let colorPointer = index % 2;
+export default function SearchHistoryCard({ record, index, renderFrom }) {
   const getSearchResult = useStore((state) => state.getSearchResult);
   const clearSearchResult = useStore((state) => state.clearSearchResult);
   const updateSearchValue = useStore((state) => state.updateSearchValue);
   const setViewHistory = useStore((state) => state.setViewHistory);
+  const loginUser = useAcStore((state) => state.loginUser);
+  const updateJourney = useAcStore((state) => state.updateJourney);
+  const updateHistory = useAcStore((state) => state.updateHistory);
+  const delLoginSearchHistory = useStore(
+    (state) => state.delLoginSearchHistory
+  );
+  const noLoginSearchHistory = useStore((state) => state.noLoginSearchHistory);
   const history = useHistory();
-  console.log(history);
+  let colorPointer = index % 2;
+  let loggedIn = false;
+  if (loginUser) loggedIn = true;
+  console.log(renderFrom);
 
   function handleOnClick() {
     setViewHistory(true);
@@ -43,10 +86,51 @@ export default function SearchHistoryCard({ record, index }) {
     history.push(`/search/from-${record.fromPostcode}-to-${record.toPostcode}`);
   }
 
+  function deleteCard(e) {
+    e.stopPropagation();
+
+    if (!loginUser) {
+      let newArray = [...noLoginSearchHistory].filter((place) => {
+        if (
+          place.fromPostcode === record.fromPostcode &&
+          place.toPostcode === record.toPostcode
+        )
+          return null;
+        return place;
+      });
+      return delLoginSearchHistory(newArray);
+    }
+    if (renderFrom === "journey") {
+      let newArray = [...loginUser["saved-journey"]].filter((place) => {
+        if (
+          place.fromPostcode === record.fromPostcode &&
+          place.toPostcode === record.toPostcode
+        )
+          return null;
+        return place;
+      });
+      updateJourney(newArray);
+    }
+    if (renderFrom === "history") {
+      let newArray = [...loginUser["history"]].filter((place) => {
+        if (
+          place.fromPostcode === record.fromPostcode &&
+          place.toPostcode === record.toPostcode
+        )
+          return null;
+        return place;
+      });
+      updateHistory(newArray);
+    }
+  }
+
   return (
     <>
       {colorPointer ? (
-        <HistoryCard colorPointer onClick={() => handleOnClick()}>
+        <HistoryCard loggedIn colorPointer onClick={() => handleOnClick()}>
+          <button className="del-card" onClick={(e) => deleteCard(e)}>
+            &times;
+          </button>
           <h3>
             {record.from} ({record.fromPostcode})
           </h3>
@@ -56,7 +140,10 @@ export default function SearchHistoryCard({ record, index }) {
           </h3>
         </HistoryCard>
       ) : (
-        <HistoryCard onClick={() => handleOnClick()}>
+        <HistoryCard loggedIn onClick={(e) => handleOnClick(e)}>
+          <button className="del-card" onClick={(e) => deleteCard(e)}>
+            &times;
+          </button>
           <h3>
             {record.from} ({record.fromPostcode})
           </h3>
