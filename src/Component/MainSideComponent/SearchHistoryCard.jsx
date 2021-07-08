@@ -68,15 +68,11 @@ export default function SearchHistoryCard({ record, index, renderFrom }) {
   const loginUser = useAcStore((state) => state.loginUser);
   const updateJourney = useAcStore((state) => state.updateJourney);
   const updateHistory = useAcStore((state) => state.updateHistory);
-  const delLoginSearchHistory = useStore(
-    (state) => state.delLoginSearchHistory
-  );
-  const noLoginSearchHistory = useStore((state) => state.noLoginSearchHistory);
+
   const history = useHistory();
   let colorPointer = index % 2;
   let loggedIn = false;
   if (loginUser) loggedIn = true;
-  console.log(renderFrom);
 
   function handleOnClick() {
     setViewHistory(true);
@@ -89,17 +85,6 @@ export default function SearchHistoryCard({ record, index, renderFrom }) {
   function deleteCard(e) {
     e.stopPropagation();
 
-    if (!loginUser) {
-      let newArray = [...noLoginSearchHistory].filter((place) => {
-        if (
-          place.fromPostcode === record.fromPostcode &&
-          place.toPostcode === record.toPostcode
-        )
-          return null;
-        return place;
-      });
-      return delLoginSearchHistory(newArray);
-    }
     if (renderFrom === "journey") {
       let newArray = [...loginUser["saved-journey"]].filter((place) => {
         if (
@@ -126,33 +111,22 @@ export default function SearchHistoryCard({ record, index, renderFrom }) {
 
   return (
     <>
-      {colorPointer ? (
-        <HistoryCard loggedIn colorPointer onClick={() => handleOnClick()}>
-          <button className="del-card" onClick={(e) => deleteCard(e)}>
-            &times;
-          </button>
-          <h3>
-            {record.from} ({record.fromPostcode})
-          </h3>
-          <div className="toward-box"></div>
-          <h3>
-            {record.to} ({record.toPostcode})
-          </h3>
-        </HistoryCard>
-      ) : (
-        <HistoryCard loggedIn onClick={(e) => handleOnClick(e)}>
-          <button className="del-card" onClick={(e) => deleteCard(e)}>
-            &times;
-          </button>
-          <h3>
-            {record.from} ({record.fromPostcode})
-          </h3>
-          <div className="toward-box"></div>
-          <h3>
-            {record.to} ({record.toPostcode})
-          </h3>
-        </HistoryCard>
-      )}
+      <HistoryCard
+        loggedIn={loggedIn}
+        colorPointer={colorPointer}
+        onClick={() => handleOnClick()}
+      >
+        <button className="del-card" onClick={(e) => deleteCard(e)}>
+          &times;
+        </button>
+        <h3>
+          {record.from} ({record.fromPostcode})
+        </h3>
+        <div className="toward-box"></div>
+        <h3>
+          {record.to} ({record.toPostcode})
+        </h3>
+      </HistoryCard>
     </>
   );
 }
