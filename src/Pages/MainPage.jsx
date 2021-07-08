@@ -1,58 +1,61 @@
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import useAcStore from "../acStore";
+import SavedLocation from "../Component/MainSideComponent/SavedLocation";
+import SearchAside from "../Component/MainSideComponent/SearchAside";
+import SearchHistory from "../Component/MainSideComponent/SearchHistory";
 import InitialMap from "../MapComponent/InitialMap";
-import { Main } from "../Component/StyledMain";
 import useStore from "../store";
 
 const ActionAside = styled.aside`
   height: 80vh;
   display: grid;
-  grid-template-rows: 100px auto auto 1fr;
+  grid-template-rows: 150px auto auto 1fr;
+  gap: 15px;
+  padding: 0 10px;
 `;
-
-function splitDurationToNumberArray(duration) {
-  let numArray = duration.split(":");
-  return numArray.map((target) => Number(target));
-}
 
 export default function MainPage() {
   const setModal = useStore((state) => state.setModal);
+  const loginUser = useAcStore((state) => state.loginUser);
+  const history = useHistory();
 
+  useEffect(() => {
+    if (loginUser) history.push(`/logged-in/${loginUser.id}`);
+  });
   return (
-    <Main>
+    <>
       <ActionAside>
-        <div>
-          <h3>Get me to somewhere</h3>
-          <button onClick={() => setModal("newSearch")}>
-            New Search using Postcode
-          </button>
-          <p>Show you all results of London Tube and Bus</p>
-        </div>
+        <SearchAside />
+        <SavedLocation />
 
-        <div>
+        {/* <div>
           <h3>Saved Location</h3>
           <button>Home</button>
           <button>Office</button>
           <button>School</button>
           <button>+ New Address</button>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <h3>Saved Journey</h3>
           <ul>
             <li>Wembley Stadium - Soho</li>
           </ul>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <h3>Searched History</h3>
-          <ul>
+          <ul className="search-history-list">
             <li>Mayfair - London Eye</li>
             <li>Camden market - White City</li>
             <li>Wembley Stadium - Soho</li>
           </ul>
-        </div>
+        </div> */}
+        <SearchHistory />
       </ActionAside>
       <InitialMap />
-    </Main>
+    </>
   );
 }

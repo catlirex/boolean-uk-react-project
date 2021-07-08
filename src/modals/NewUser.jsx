@@ -36,6 +36,7 @@ function NewUser({ className }) {
       id: e.target.username.value,
       name: e.target.name.value,
       password: e.target.password.value,
+      history: [],
     };
 
     if (e.target.home.value && postCodeIsValid)

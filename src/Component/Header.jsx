@@ -6,13 +6,18 @@ const StyleHeader = styled.header`
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 50px;
+  background-color: #bdece3;
+  padding: 20px 50px;
+  .logo {
+    height: 10vh;
+    border-radius: 10px;
+  }
 `;
 
 export default function Header() {
   return (
     <StyleHeader>
-      <h1>London Transport Ease</h1>
+      <img className="logo" src="/assets/logo.png" />
       <HeaderAccountBar />
     </StyleHeader>
   );

@@ -6,37 +6,39 @@ import MainPage from "./Pages/MainPage";
 import SearchResultPage from "./Pages/SearchResultPage";
 import JourneyDetailPage from "./Pages/JourneyDetailPage";
 import ModalContainer from "./modals/ModalContainer";
+import { StyledWrapper } from "./Component/StyledWrapper";
 
 export default function App() {
   return (
     <>
       <Header />
+      <StyledWrapper>
+        <Switch>
+          <Route path="/" exact>
+            <MainPage />
+          </Route>
 
-      <Switch>
-        <Route path="/" exact>
-          <MainPage />
-        </Route>
+          <Route path="/search/:searchPath/:resultIndex">
+            <JourneyDetailPage />
+          </Route>
 
-        <Route path="/search/:searchPath/:resultIndex">
-          <JourneyDetailPage />
-        </Route>
+          <Route path="/search/:searchPath">
+            <SearchResultPage />
+          </Route>
 
-        <Route path="/search/:searchPath">
-          <SearchResultPage />
-        </Route>
+          <Route path="/search/">
+            <Redirect to="/" />
+          </Route>
 
-        <Route path="/search/">
-          <Redirect to="/" />
-        </Route>
+          <Route path="/logged-in/:username" exact>
+            <h3>logged in with username</h3>
+          </Route>
 
-        <Route path="/logged-in/:username" exact>
-          <h3>logged in with username</h3>
-        </Route>
-
-        <Route>
-          <h3>Error 404</h3>
-        </Route>
-      </Switch>
+          <Route>
+            <h3>Error 404</h3>
+          </Route>
+        </Switch>
+      </StyledWrapper>
       <ModalContainer />
     </>
   );

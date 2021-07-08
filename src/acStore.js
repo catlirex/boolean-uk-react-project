@@ -20,6 +20,13 @@ const useAcStore = create((set, get) => ({
     set({ loginUser: null });
   },
   newRegUserSetLogin: (newRegUser) => set({ loginUser: newRegUser }),
+  addHistoryToLoginUser: (newHistory) =>
+    set({
+      loginUser: {
+        ...get().loginUser,
+        history: [newHistory, ...get().loginUser.history],
+      },
+    }),
 }));
 
 export default useAcStore;

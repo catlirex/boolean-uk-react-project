@@ -1059,14 +1059,18 @@ const useStore = create((set, get) => ({
           });
         });
         set({ searchResult: [...usefulData] });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        set({ searchResult: [] });
       });
   },
   clearSearchResult: () => {
-    set({ searchResult: [] });
+    set({ searchResult: null });
   },
-  searchValue: null,
-  updateSearchValue: (fromPostcode, toPostCode) => {
-    set({ searchValue: { fromPostcode, toPostCode } });
+  searchValue: { fromPostcode: "ha89ar", toPostcode: "ha89ar" },
+  updateSearchValue: (fromPostcode, toPostcode) => {
+    set({ searchValue: { fromPostcode, toPostcode } });
   },
 
   mapCenterCoordinates: [],
@@ -1074,10 +1078,24 @@ const useStore = create((set, get) => ({
     set({ mapCenterCoordinates: [...array] });
   },
 
-  searchHistory: [],
-  addSearchHistory: () => {
-    set({ searchHistory: [...get().searchHistory, get().searchValue] });
-  },
+  noLoginSearchHistory: [
+    {
+      from: "1 Elmer Gardens, Edgware",
+      to: "Riverside Walk, Waterloo (London)",
+      fromPostcode: "HA89AR",
+      toPostcode: "SE17PB",
+    },
+    {
+      from: "testing",
+      to: "Riverside Walk, Waterloo (London)",
+      fromPostcode: "HA89AR",
+      toPostcode: "SE17PB",
+    },
+  ],
+  addNoLoginSearchHistory: (newHistory) =>
+    set({
+      noLoginSearchHistory: [newHistory, ...get().noLoginSearchHistory],
+    }),
 }));
 
 export default useStore;

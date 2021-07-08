@@ -7,7 +7,8 @@
       "saved-place": {
         "home": "HA89AR",
         "work": "E201EJ"
-      }
+      },
+      "history": []
     },
     {
       "id": "testing",
@@ -15,13 +16,15 @@
       "password": "123123",
       "saved-place": {
         "home": "ha89ar"
-      }
+      },
+      "history": []
     },
     {
       "id": "test1",
       "name": "test1",
       "password": "test1",
-      "saved-place": {}
+      "saved-place": {},
+      "history": []
     }
   ]
 }

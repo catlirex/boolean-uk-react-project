@@ -1,4 +1,3 @@
-import { Main } from "../Component/StyledMain";
 import styled from "styled-components";
 import JourneyDetailMap from "../MapComponent/JourneyDetailMap";
 import { useHistory, useParams } from "react-router-dom";
@@ -42,7 +41,7 @@ export default function JourneyDetailPage() {
 
   console.log(searchResult[resultIndex]);
   return (
-    <Main>
+    <>
       <JourneyAside>
         <div>
           <p className="search-info">
@@ -89,6 +88,6 @@ export default function JourneyDetailPage() {
       <div></div>
 
       <JourneyDetailMap result={searchResult[resultIndex]} />
-    </Main>
+    </>
   );
 }

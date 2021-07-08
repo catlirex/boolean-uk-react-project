@@ -19,7 +19,7 @@ export default function ToFromMap() {
   const mapCenterCoordinates = useStore((state) => state.mapCenterCoordinates);
 
   useEffect(() => {
-    if (searchResult.length === 0) return;
+    if (!searchResult || searchResult.length === 0) return;
 
     setFirstCoordinate(searchResult[0].route_parts[0].coordinates[0]);
     let routeLength = searchResult[0].route_parts.length;
@@ -37,7 +37,6 @@ export default function ToFromMap() {
       if (!firstCoordinate || !lastCoordinate) return;
       let centerLat = (firstCoordinate[0] + lastCoordinate[0]) / 2;
       let centerLot = (firstCoordinate[1] + lastCoordinate[1]) / 2;
-      console.log([centerLat, centerLot]);
       updateMapCenterCoordinates([centerLat, centerLot]);
     },
     [firstCoordinate, lastCoordinate],

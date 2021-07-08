@@ -5,6 +5,9 @@
   font-family: "Roboto", sans-serif;
 }
 
+html {
+  overflow: hidden;
+}
 ul {
   list-style: none;
 }

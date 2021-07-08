@@ -43,7 +43,7 @@ export default styled(ModalContainer)`
   display: grid;
   place-content: center;
 
-  background-color: #00000040;
+  background-color: rgb(189, 236, 227, 0.5);
 
   z-index: 1000;
 
@@ -65,14 +65,14 @@ export default styled(ModalContainer)`
 
     justify-self: end;
     border-radius: 50%;
-    border: solid 1px navy;
-    background-color: navy;
+    border: solid 2px navy;
+    background-color: #6dd6c2;
 
     width: 30px;
     height: 30px;
 
     font-size: 1.5rem;
-    color: white;
+    color: navy;
 
     display: grid;
     place-content: center;
