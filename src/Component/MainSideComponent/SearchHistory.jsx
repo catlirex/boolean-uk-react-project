@@ -26,6 +26,8 @@ export default function SearchHistory() {
               <SearchHistoryCard record={record} key={index} index={index} />
             ))
           )
+        ) : noLoginSearchHistory.length === 0 ? (
+          <em>No history, search one</em>
         ) : (
           noLoginSearchHistory.map((record, index) => (
             <SearchHistoryCard record={record} key={index} index={index} />

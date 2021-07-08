@@ -14,6 +14,7 @@ const ActionAside = styled.aside`
   grid-template-rows: 150px auto auto 1fr;
   gap: 15px;
   padding: 0 10px;
+  overflow: scroll;
 `;
 
 export default function MainPage() {

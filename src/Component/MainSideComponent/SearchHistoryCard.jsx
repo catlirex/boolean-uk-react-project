@@ -6,7 +6,8 @@ const HistoryCard = styled.li`
   background-color: ${(props) => (props.colorPointer ? "#95e1d3" : "#bdece3")};
 
   list-style: none;
-  width: fit-content;
+  max-width: 30vw;
+  width: 100%;
   padding 10px;
   border-radius:5px;
   box-shadow: 0px 1px 5px 1px lightgray;

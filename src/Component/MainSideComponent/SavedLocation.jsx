@@ -81,7 +81,7 @@ export default function SavedLocation() {
       <StyledBookmarkDiv>
         <div className="container">
           <h3>Bookmarked Location & Saved Journey</h3>
-          <p>Login to view shortcut</p>
+          <em>Login to view shortcut</em>
           <div className="auto-col btn-container">
             <Button
               variant="contained"

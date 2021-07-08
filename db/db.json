@@ -33,8 +33,29 @@
       "name": "test1",
       "password": "test1",
       "saved-place": {},
-      "saved-journey": [],
+      "saved-journey": [
+        {
+          "from": "specified point, Victoria (London)",
+          "to": "1 Lee Conservancy Road, Hackney",
+          "fromPostcode": "SW1A1AA",
+          "toPostcode": "E95HW"
+        },
+        {
+          "from": "1 Elmer Gardens, Edgware",
+          "to": "Riverside Walk, Waterloo (London)",
+          "fromPostcode": "HA89AR",
+          "toPostcode": "SE17PB"
+        }
+      ],
       "history": []
+    },
+    {
+      "id": "fing",
+      "name": "fing",
+      "password": "123123",
+      "history": [],
+      "saved-journey": [],
+      "saved-place": {}
     }
   ]
 }

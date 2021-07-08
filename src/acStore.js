@@ -23,6 +23,16 @@ const useAcStore = create((set, get) => ({
       set({ loginUser: data })
     );
   },
+
+  addSaveJourney: (newJourney) => {
+    console.log("newJourney", newJourney);
+    let allJourney = [newJourney, ...get().loginUser["saved-journey"]];
+    console.log("allJourney", allJourney);
+
+    patchUpdateUser(get().loginUser.id, { "saved-journey": allJourney }).then(
+      (data) => set({ loginUser: data })
+    );
+  },
 }));
 
 export default useAcStore;
