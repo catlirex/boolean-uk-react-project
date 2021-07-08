@@ -5,6 +5,7 @@ import MapIcon from "@material-ui/icons/Map";
 import { IconButton } from "@material-ui/core";
 import { PATH_COLOR } from "../consistent";
 import useStore from "../store";
+import { setZoomScale } from "../helperFunction";
 
 const Card = styled.li`
   border-bottom: 1px solid lightgray;
@@ -46,16 +47,19 @@ export default function TravelPartCard({ part }) {
   const updateMapCenterCoordinates = useStore(
     (state) => state.updateMapCenterCoordinates
   );
+  const setZoomScaleControl = useStore((state) => state.setZoomScaleControl);
 
   function zoomMap() {
-    console.log([
-      part.coordinates[0],
-      part.coordinates[part.coordinates.length - 1],
-    ]);
-    updateMapCenterCoordinates([
-      part.coordinates[0],
-      part.coordinates[part.coordinates.length - 1],
-    ]);
+    let centerLat =
+      (part.coordinates[0][0] +
+        part.coordinates[part.coordinates.length - 1][0]) /
+      2;
+    let centerLot =
+      (part.coordinates[0][1] +
+        part.coordinates[part.coordinates.length - 1][1]) /
+      2;
+    updateMapCenterCoordinates([centerLat, centerLot]);
+    setZoomScaleControl(setZoomScale(part.duration));
   }
   return (
     <Card>
@@ -70,12 +74,7 @@ export default function TravelPartCard({ part }) {
               </span>
               <span> mins</span>
             </div>
-            <IconButton
-              aria-label="view-map"
-              onClick={() => {
-                zoomMap();
-              }}
-            >
+            <IconButton aria-label="view-map" onClick={() => zoomMap()}>
               <MapIcon fontSize="small" />
             </IconButton>
           </div>
@@ -116,7 +115,7 @@ export default function TravelPartCard({ part }) {
               </span>
               <span> mins</span>
             </div>
-            <IconButton aria-label="view-map">
+            <IconButton aria-label="view-map" onClick={() => zoomMap()}>
               <MapIcon fontSize="small" />
             </IconButton>
           </div>
@@ -164,7 +163,7 @@ export default function TravelPartCard({ part }) {
               </span>
               <span> mins</span>
             </div>
-            <IconButton aria-label="view-map">
+            <IconButton aria-label="view-map" onClick={() => zoomMap()}>
               <MapIcon fontSize="small" />
             </IconButton>
           </div>
@@ -207,7 +206,7 @@ export default function TravelPartCard({ part }) {
               </span>
               <span> mins</span>
             </div>
-            <IconButton aria-label="view-map">
+            <IconButton aria-label="view-map" onClick={() => zoomMap()}>
               <MapIcon fontSize="small" />
             </IconButton>
           </div>

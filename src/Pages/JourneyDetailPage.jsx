@@ -38,8 +38,8 @@ export default function JourneyDetailPage() {
   const { resultIndex, searchPath } = useParams();
   const history = useHistory();
   const searchResult = useStore((state) => state.searchResult);
-
   console.log(searchResult[resultIndex]);
+
   return (
     <>
       <JourneyAside>
