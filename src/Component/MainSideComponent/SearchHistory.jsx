@@ -18,9 +18,19 @@ export default function SearchHistory() {
     <div>
       <h3>Searched History</h3>
       <SearchHistoryList>
-        {noLoginSearchHistory.map((history, index) => (
-          <SearchHistoryCard history={history} key={index} index={index} />
-        ))}
+        {loginUser ? (
+          loginUser.history.length === 0 ? (
+            <em>No history, search one</em>
+          ) : (
+            loginUser.history.map((record, index) => (
+              <SearchHistoryCard record={record} key={index} index={index} />
+            ))
+          )
+        ) : (
+          noLoginSearchHistory.map((record, index) => (
+            <SearchHistoryCard record={record} key={index} index={index} />
+          ))
+        )}
       </SearchHistoryList>
     </div>
   );

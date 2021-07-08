@@ -8,7 +8,15 @@
         "home": "HA89AR",
         "work": "E201EJ"
       },
-      "history": []
+      "history": [
+        {
+          "from": "1 Elmer Gardens, Edgware",
+          "to": "Riverside Walk, Waterloo (London)",
+          "fromPostcode": "HA89AR",
+          "toPostcode": "SE17PB"
+        }
+      ],
+      "saved-journey": []
     },
     {
       "id": "testing",
@@ -17,6 +25,7 @@
       "saved-place": {
         "home": "ha89ar"
       },
+      "saved-journey": [],
       "history": []
     },
     {
@@ -24,6 +33,7 @@
       "name": "test1",
       "password": "test1",
       "saved-place": {},
+      "saved-journey": [],
       "history": []
     }
   ]

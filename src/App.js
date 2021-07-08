@@ -31,7 +31,7 @@ export default function App() {
           </Route>
 
           <Route path="/logged-in/:username" exact>
-            <h3>logged in with username</h3>
+            <MainPage />
           </Route>
 
           <Route>

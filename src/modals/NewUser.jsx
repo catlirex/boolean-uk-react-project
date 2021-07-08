@@ -37,6 +37,7 @@ function NewUser({ className }) {
       name: e.target.name.value,
       password: e.target.password.value,
       history: [],
+      "saved-journey": [],
     };
 
     if (e.target.home.value && postCodeIsValid)

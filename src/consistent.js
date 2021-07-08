@@ -20,6 +20,16 @@ export function postUser(newUserDetail) {
   });
 }
 
+export function patchUpdateUser(loginUserId, updatedUser) {
+  return fetch(`${LOCAL_DB}/users/${loginUserId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedUser),
+  }).then((response) => response.json());
+}
+
 export const MODE_IMAGE = {
   foot: "/assets/walkman.png",
   bus: "/assets/Buses.png",

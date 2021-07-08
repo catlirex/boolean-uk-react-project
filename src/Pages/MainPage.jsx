@@ -29,30 +29,6 @@ export default function MainPage() {
       <ActionAside>
         <SearchAside />
         <SavedLocation />
-
-        {/* <div>
-          <h3>Saved Location</h3>
-          <button>Home</button>
-          <button>Office</button>
-          <button>School</button>
-          <button>+ New Address</button>
-        </div> */}
-
-        {/* <div>
-          <h3>Saved Journey</h3>
-          <ul>
-            <li>Wembley Stadium - Soho</li>
-          </ul>
-        </div> */}
-
-        {/* <div>
-          <h3>Searched History</h3>
-          <ul className="search-history-list">
-            <li>Mayfair - London Eye</li>
-            <li>Camden market - White City</li>
-            <li>Wembley Stadium - Soho</li>
-          </ul>
-        </div> */}
         <SearchHistory />
       </ActionAside>
       <InitialMap />

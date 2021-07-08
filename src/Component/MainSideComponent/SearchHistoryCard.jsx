@@ -1,50 +1,67 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import useStore from "../../store";
 
 const HistoryCard = styled.li`
   background-color: ${(props) => (props.colorPointer ? "#95e1d3" : "#bdece3")};
 
+  list-style: none;
   width: fit-content;
-  padding 20px;
+  padding 10px;
   border-radius:5px;
   box-shadow: 0px 1px 5px 1px lightgray;
 
+
   h3{
       font-weight:400;
-      font-size:1.1rem
+      font-size:1rem
   }
    .toward-box {
-    width: 5px;
+    width: 3px;
     height: 20px;
     border-radius: 2px;
     background-color: rgb(72, 72, 72);
-    margin: 3px 5px;
+    margin: 3px 3px;
   }
 `;
 
-export default function SearchHistoryCard({ history, index }) {
+export default function SearchHistoryCard({ record, index }) {
   let colorPointer = index % 2;
+  const getSearchResult = useStore((state) => state.getSearchResult);
+  const clearSearchResult = useStore((state) => state.clearSearchResult);
+  const updateSearchValue = useStore((state) => state.updateSearchValue);
+  const setViewHistory = useStore((state) => state.setViewHistory);
+  const history = useHistory();
   console.log(history);
+
+  function handleOnClick() {
+    setViewHistory(true);
+    clearSearchResult();
+    updateSearchValue(record.fromPostcode, record.toPostcode);
+    getSearchResult(record.fromPostcode, record.toPostcode);
+    history.push(`/search/from-${record.fromPostcode}-to-${record.toPostcode}`);
+  }
 
   return (
     <>
       {colorPointer ? (
-        <HistoryCard colorPointer>
+        <HistoryCard colorPointer onClick={() => handleOnClick()}>
           <h3>
-            {history.from} ({history.fromPostcode})
+            {record.from} ({record.fromPostcode})
           </h3>
           <div className="toward-box"></div>
           <h3>
-            {history.to} ({history.toPostcode})
+            {record.to} ({record.toPostcode})
           </h3>
         </HistoryCard>
       ) : (
-        <HistoryCard>
+        <HistoryCard onClick={() => handleOnClick()}>
           <h3>
-            {history.from} ({history.fromPostcode})
+            {record.from} ({record.fromPostcode})
           </h3>
           <div className="toward-box"></div>
           <h3>
-            {history.to} ({history.toPostcode})
+            {record.to} ({record.toPostcode})
           </h3>
         </HistoryCard>
       )}

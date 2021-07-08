@@ -49,13 +49,17 @@ export default function SearchResultPage() {
   const { searchPath } = useParams();
   const searchValue = useStore((state) => state.searchValue);
   const loginUser = useAcStore((state) => state.loginUser);
+  const viewHistory = useStore((state) => state.viewHistory);
   const addNoLoginSearchHistory = useStore(
     (state) => state.addNoLoginSearchHistory
+  );
+  const addHistoryToLoginUser = useAcStore(
+    (state) => state.addHistoryToLoginUser
   );
   console.log(searchResult);
 
   useEffect(() => {
-    if (!searchResult || searchResult.length === 0) return;
+    if (!searchResult || searchResult.length === 0 || viewHistory) return;
     let newHistory = {
       from: searchResult[0].route_parts[0].from_point_name,
       to: searchResult[0].route_parts[searchResult[0].route_parts.length - 1]
@@ -64,6 +68,7 @@ export default function SearchResultPage() {
       toPostcode: searchValue.toPostcode,
     };
     if (!loginUser) addNoLoginSearchHistory(newHistory);
+    else addHistoryToLoginUser(newHistory);
   }, [searchResult]);
 
   if (searchResult === null) {

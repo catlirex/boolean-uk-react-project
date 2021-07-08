@@ -27,6 +27,7 @@ function NewSearch({ className }) {
   const history = useHistory();
   const clearSearchResult = useStore((state) => state.clearSearchResult);
   const updateSearchValue = useStore((state) => state.updateSearchValue);
+  const setViewHistory = useStore((state) => state.setViewHistory);
 
   function handleOnChange(e) {
     if (e.target.name === "from") {
@@ -45,6 +46,7 @@ function NewSearch({ className }) {
   function handleSubmit(e, fromPostCode, toPostCode) {
     e.preventDefault();
     clearSearchResult();
+    setViewHistory(false);
     updateSearchValue(
       fromPostCode.split(" ").join(""),
       toPostCode.split(" ").join("")

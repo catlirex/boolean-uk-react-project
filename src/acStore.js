@@ -1,13 +1,7 @@
 import create from "zustand";
-import { getUser } from "./consistent";
+import { getUser, patchUpdateUser } from "./consistent";
 
 const useAcStore = create((set, get) => ({
-  //   userList: [],
-  //   getUserList: () => {
-  //     fetch("http://localhost:4000/users")
-  //       .then((resp) => resp.json())
-  //       .then((users) => set({ userList: [...users] }));
-  //   },
   loginUser: null,
   setLogInUser: (e) => {
     getUser(e.target.username.value).then((data) => {
@@ -20,13 +14,15 @@ const useAcStore = create((set, get) => ({
     set({ loginUser: null });
   },
   newRegUserSetLogin: (newRegUser) => set({ loginUser: newRegUser }),
-  addHistoryToLoginUser: (newHistory) =>
-    set({
-      loginUser: {
-        ...get().loginUser,
-        history: [newHistory, ...get().loginUser.history],
-      },
-    }),
+  addHistoryToLoginUser: (newHistory) => {
+    console.log("newHistory", newHistory);
+    let history = [newHistory, ...get().loginUser.history];
+    console.log("history", history);
+
+    patchUpdateUser(get().loginUser.id, { history }).then((data) =>
+      set({ loginUser: data })
+    );
+  },
 }));
 
 export default useAcStore;
