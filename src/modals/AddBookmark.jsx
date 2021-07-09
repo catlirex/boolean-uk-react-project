@@ -22,6 +22,7 @@ function AddBookmark({ className }) {
   const [postCodeInputIsValid, setPostCodeInputIsValid] = useState(true);
   const loginUser = useAcStore((state) => state.loginUser);
   const addSavePlace = useAcStore((state) => state.addSavePlace);
+  const setModal = useStore((state) => state.setModal);
 
   function handleOnChange(e) {
     setPostCodeInput(e.target.value.toUpperCase());
@@ -35,7 +36,7 @@ function AddBookmark({ className }) {
     let updatedObj = { ...loginUser["saved-place"] };
     updatedObj[e.target.name.value] = postCodeInput;
     addSavePlace(updatedObj);
-    closeModal();
+    setModal("success");
   }
   return (
     <div className={className}>

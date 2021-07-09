@@ -31,6 +31,7 @@ export default function FooterResultPage() {
     let allJourney = [newJourney, ...loginUser["saved-journey"]];
 
     updateJourney(allJourney);
+    setModal("success");
   }
 
   return (

@@ -5,6 +5,7 @@ import NewSearch from "./NewSearch";
 import Login from "./Login";
 import NewUser from "./NewUser";
 import AddBookmark from "./AddBookmark";
+import Success from "./Success";
 
 const modals = {
   "": null,
@@ -12,6 +13,7 @@ const modals = {
   login: Login,
   newUser: NewUser,
   bookmark: AddBookmark,
+  success: Success,
 };
 
 function ModalContainer({ className }) {
