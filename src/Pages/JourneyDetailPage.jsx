@@ -8,9 +8,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import TravelPartCard from "../Component/TravelPartCard";
 
 const JourneyAside = styled.aside`
-  height: 80vh;
-  display: grid;
-  grid-template-rows: 50px auto 1fr;
+  height: 75vh;
+
   padding: 10px;
   position: fixed;
   overflow: scroll;
@@ -22,9 +21,14 @@ const JourneyAside = styled.aside`
     padding: 10px 0;
   }
 
-  nav {
+  footer {
     position: fixed;
     bottom: 3vh;
+    width: 40vw;
+    left: 2vw;
+    background-color: white;
+    height: 50px;
+    padding: 5px;
   }
   .search-info {
     padding: 3px;
@@ -70,7 +74,7 @@ export default function JourneyDetailPage() {
             ))}
           </ul>
         </section>
-        <nav>
+        <footer>
           <Button variant="contained" onClick={() => history.push("/")}>
             <HomeIcon />
           </Button>
@@ -83,7 +87,7 @@ export default function JourneyDetailPage() {
           <Button variant="contained" onClick={() => setModal("newSearch")}>
             New Search
           </Button>
-        </nav>
+        </footer>
       </JourneyAside>
       <div></div>
 

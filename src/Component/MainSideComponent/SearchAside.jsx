@@ -6,6 +6,7 @@ import styled from "styled-components";
 const StyledSearchDiv = styled.div`
   display: grid;
   grid-auto-rows: max-content;
+
   gap: 10px;
   max-width: 30vw;
   color: #2a2a2a;

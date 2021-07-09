@@ -13,9 +13,13 @@ import useStore from "../../store";
 const StyledBookmarkDiv = styled.div`
   display: grid;
   gap: 20px;
-  grid-template-rows: 200px auto;
+  grid-template-rows: auto auto;
   max-width: 30vw;
   color: #2a2a2a;
+
+  .bookmark-location {
+    min-height: 200px;
+  }
 
   .container {
     grid-auto-rows: max-content;
@@ -107,7 +111,7 @@ export default function SavedLocation() {
   if (loginUser)
     return (
       <StyledBookmarkDiv>
-        <div className="container">
+        <div className="container bookmark-location">
           <h3>Bookmarked Location</h3>
           <div>
             {Object.keys(loginUser["saved-place"]).length ? (
@@ -164,7 +168,7 @@ export default function SavedLocation() {
             )}
           </div>
         </div>
-        <div className="container">
+        <div className="container saved-journey">
           <h3>Saved Journey</h3>
 
           {Object.keys(loginUser["saved-journey"]).length ? (

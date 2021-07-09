@@ -25,10 +25,11 @@ const ResultCard = styled.li`
   }
   .path-time-container {
     display: grid;
-    grid-template-columns: repeat(2, 150px);
+    grid-template-columns: repeat(2, 100px);
     gap: 5px;
   }
   .time {
+    margin: 0;
     font-weight: 700;
     text-align: center;
     max-width: 100px;
@@ -39,8 +40,9 @@ const ResultCard = styled.li`
   }
   .path-container {
     display: grid;
-    grid-auto-flow: column;
+    grid-template-columns: repeat(6, auto);
     justify-content: flex-start;
+    width: fit-content;
 
     padding-bottom: 10px;
     align-items: center;
@@ -51,6 +53,34 @@ const ResultCard = styled.li`
   }
   .duration-container {
     text-align: right;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    .path-icon {
+      height: 20px;
+      padding: 2px;
+    }
+
+    .arrow-icon {
+      height: 15px;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .path-icon {
+      height: 20px;
+      padding: 2px;
+    }
+
+    .path-time-container {
+      display: grid;
+      grid-template-columns: repeat(2, 50px);
+      gap: 5px;
+    }
+
+    .arrow-icon {
+      display: none;
+    }
   }
 `;
 
@@ -68,7 +98,7 @@ export default function SearchResultCard({ result, index, searchPath }) {
         <div className="path-container">
           {result.route_parts.map((part, index) => (
             <div key={"path" + index}>
-              {index !== 0 ? <ArrowRightIcon /> : null}
+              {index !== 0 ? <ArrowRightIcon className={"arrow-icon"} /> : null}
               <img
                 className="path-icon"
                 src={
