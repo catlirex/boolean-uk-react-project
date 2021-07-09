@@ -63,11 +63,12 @@ export default function SearchResultPage() {
   );
   console.log(searchResult);
   let backgroundColor = "#6dd6c2";
-  const [isLoading, setIsLoading] = useState(true);
+  let isLoading = true;
+  if (searchResult) isLoading = false;
 
   useEffect(() => {
     if (!searchResult || searchResult.length === 0 || viewHistory) return;
-    setIsLoading(false);
+
     let newHistory = {
       from: searchResult[0].route_parts[0].from_point_name,
       to: searchResult[0].route_parts[searchResult[0].route_parts.length - 1]
@@ -79,6 +80,7 @@ export default function SearchResultPage() {
     else addHistoryToLoginUser(newHistory);
   }, [searchResult]);
 
+  console.log(isLoading);
   if (searchResult && searchResult.length === 0) {
     return (
       <>

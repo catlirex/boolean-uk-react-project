@@ -7,7 +7,6 @@ import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import AddIcon from "@material-ui/icons/Add";
 import WorkIcon from "@material-ui/icons/Work";
 import SearchHistoryCard from "./SearchHistoryCard";
-import EditIcon from "@material-ui/icons/Edit";
 import useStore from "../../store";
 
 const StyledBookmarkDiv = styled.div`
@@ -61,16 +60,6 @@ const DarkButton = withStyles(() => ({
     color: "white",
     backgroundColor: "#2a2a2a",
 
-    "&:hover": {
-      backgroundColor: "grey",
-    },
-  },
-}))(Button);
-
-const GreenButton = withStyles(() => ({
-  root: {
-    color: "#2a2a2a",
-    backgroundColor: "#bdece3",
     "&:hover": {
       backgroundColor: "grey",
     },

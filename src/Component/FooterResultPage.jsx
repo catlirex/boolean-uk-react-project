@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core";
+import { Button, withStyles } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import styled from "styled-components";
@@ -10,6 +10,16 @@ const StyledNav = styled.div`
   grid-auto-flow: column;
   gap: 10px;
 `;
+
+const GreenButton = withStyles(() => ({
+  root: {
+    color: "#2a2a2a",
+    backgroundColor: "#bdece3",
+    "&:hover": {
+      backgroundColor: "grey",
+    },
+  },
+}))(Button);
 
 export default function FooterResultPage() {
   const setModal = useStore((state) => state.setModal);
@@ -36,20 +46,20 @@ export default function FooterResultPage() {
 
   return (
     <StyledNav>
-      <Button variant="contained" onClick={() => history.push("/")}>
+      <GreenButton variant="contained" onClick={() => history.push("/")}>
         <HomeIcon />
-      </Button>
+      </GreenButton>
 
-      <Button variant="contained" onClick={() => setModal("newSearch")}>
+      <GreenButton variant="contained" onClick={() => setModal("newSearch")}>
         New Search
-      </Button>
-      <Button
+      </GreenButton>
+      <GreenButton
         variant="contained"
         disabled={loginUser ? false : true}
         onClick={() => handleOnClick()}
       >
         Save Journey
-      </Button>
+      </GreenButton>
     </StyledNav>
   );
 }
