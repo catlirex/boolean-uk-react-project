@@ -47,12 +47,6 @@
       },
       "saved-journey": [
         {
-          "from": "Riverside Walk, Waterloo (London)",
-          "to": "1 Elmer Gardens, Edgware",
-          "fromPostcode": "SE17PB",
-          "toPostcode": "HA89AR"
-        },
-        {
           "from": "1 Elmer Gardens, Edgware",
           "to": "72 The Broadway, Mill Hill",
           "fromPostcode": "HA89AR",
@@ -61,9 +55,9 @@
       ],
       "history": [
         {
-          "from": "72 The Broadway, Mill Hill",
+          "from": "Riverside Walk, Waterloo (London)",
           "to": "1 Elmer Gardens, Edgware",
-          "fromPostcode": "NW73TG",
+          "fromPostcode": "SE17PB",
           "toPostcode": "HA89AR"
         },
         {
