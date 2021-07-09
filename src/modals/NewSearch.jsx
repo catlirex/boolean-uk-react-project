@@ -6,6 +6,8 @@ import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import useAcStore from "../acStore";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +30,13 @@ function NewSearch({ className }) {
   const clearSearchResult = useStore((state) => state.clearSearchResult);
   const updateSearchValue = useStore((state) => state.updateSearchValue);
   const setViewHistory = useStore((state) => state.setViewHistory);
+  const selectedBookmarkPostcode = useAcStore(
+    (state) => state.selectedBookmarkPostcode
+  );
+
+  useEffect(() => {
+    setFromPostCode(selectedBookmarkPostcode);
+  }, [selectedBookmarkPostcode]);
 
   function handleOnChange(e) {
     if (e.target.name === "from") {
@@ -75,7 +84,7 @@ function NewSearch({ className }) {
           id="from"
           label="Starting Postcode"
           autoComplete="off"
-          defaultValue={fromPostCode}
+          value={fromPostCode}
           helperText={
             !fromPostCodeIsValid
               ? "Incorrect Input, sample: SE17PB"

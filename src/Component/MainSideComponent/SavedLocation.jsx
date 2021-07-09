@@ -69,6 +69,14 @@ const DarkButton = withStyles(() => ({
 export default function SavedLocation() {
   const loginUser = useAcStore((state) => state.loginUser);
   const setModal = useStore((state) => state.setModal);
+  const setSelectedBookmarkPostcode = useAcStore(
+    (state) => state.setSelectedBookmarkPostcode
+  );
+  function handleBookmarkClick(postcode) {
+    setSelectedBookmarkPostcode(postcode);
+    setModal("newSearch");
+  }
+
   if (!loginUser)
     return (
       <StyledBookmarkDiv>
@@ -108,7 +116,13 @@ export default function SavedLocation() {
                 <div className="place-container">
                   {Object.keys(loginUser["saved-place"]).map(function (key) {
                     return (
-                      <DarkButton variant="contained" color="default">
+                      <DarkButton
+                        variant="contained"
+                        color="default"
+                        onClick={() =>
+                          handleBookmarkClick(loginUser["saved-place"][key])
+                        }
+                      >
                         {key} - {loginUser["saved-place"][key]}
                       </DarkButton>
                     );

@@ -39,6 +39,9 @@ const useAcStore = create((set, get) => ({
       (data) => set({ loginUser: data })
     );
   },
+  selectedBookmarkPostcode: null,
+  setSelectedBookmarkPostcode: (postcode) =>
+    set({ selectedBookmarkPostcode: postcode }),
 }));
 
 export default useAcStore;
