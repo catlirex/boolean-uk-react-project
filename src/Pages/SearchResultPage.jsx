@@ -3,11 +3,13 @@ import ToFromMap from "../MapComponent/ToFromMap";
 import useStore from "../store";
 import SearchResultCard from "../Component/SearchResultCard";
 import { IconButton } from "@material-ui/core";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FooterResultPage from "../Component/FooterResultPage";
 import { useEffect } from "react";
 import useAcStore from "../acStore";
+import StyledContentLoader from "styled-content-loader";
+import { useState } from "react";
 
 const SearchAside = styled.aside`
   height: 80vh;
@@ -42,6 +44,9 @@ const SearchAside = styled.aside`
     display: grid;
     gap: 20px;
   }
+  footer {
+    padding: 20px 0;
+  }
 `;
 
 export default function SearchResultPage() {
@@ -57,9 +62,12 @@ export default function SearchResultPage() {
     (state) => state.addHistoryToLoginUser
   );
   console.log(searchResult);
+  let backgroundColor = "#6dd6c2";
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!searchResult || searchResult.length === 0 || viewHistory) return;
+    setIsLoading(false);
     let newHistory = {
       from: searchResult[0].route_parts[0].from_point_name,
       to: searchResult[0].route_parts[searchResult[0].route_parts.length - 1]
@@ -71,17 +79,7 @@ export default function SearchResultPage() {
     else addHistoryToLoginUser(newHistory);
   }, [searchResult]);
 
-  if (searchResult === null) {
-    return (
-      <>
-        <SearchAside>
-          <h2>Search Result: Loading...</h2>
-        </SearchAside>
-      </>
-    );
-  }
-
-  if (searchResult.length === 0) {
+  if (searchResult && searchResult.length === 0) {
     return (
       <>
         <SearchAside>
@@ -101,43 +99,59 @@ export default function SearchResultPage() {
   return (
     <>
       <SearchAside>
-        <div>
-          <div className="result-header">
-            <h2>Search Result {`(${searchResult.length})`}</h2>
+        <StyledContentLoader
+          isLoading={isLoading}
+          foregroundColor={backgroundColor}
+        >
+          <div>
+            <div className="result-header">
+              <h2>
+                Search Result {searchResult ? `(${searchResult.length})` : null}
+              </h2>
 
-            <IconButton aria-label="refresh" disabled>
-              <RefreshIcon />
-            </IconButton>
+              <IconButton aria-label="refresh" disabled>
+                <RefreshIcon />
+              </IconButton>
+            </div>
+
+            <p>
+              From:{" "}
+              {searchResult
+                ? searchResult[0].route_parts[0].from_point_name
+                : null}
+            </p>
+            <p>
+              To:{" "}
+              {searchResult
+                ? searchResult[0].route_parts[
+                    searchResult[0].route_parts.length - 1
+                  ].to_point_name
+                : null}
+            </p>
           </div>
 
-          <p>From: {searchResult[0].route_parts[0].from_point_name}</p>
-          <p>
-            To:{" "}
-            {
-              searchResult[0].route_parts[
-                searchResult[0].route_parts.length - 1
-              ].to_point_name
-            }
-          </p>
-        </div>
-
-        <ul className="result-list-container">
-          {searchResult.map((result, index) => (
-            <SearchResultCard
-              key={index}
-              index={index}
-              result={result}
-              searchPath={searchPath}
-            />
-          ))}
-        </ul>
-
+          <ul className="result-list-container">
+            {searchResult
+              ? searchResult.map((result, index) => (
+                  <SearchResultCard
+                    key={index}
+                    index={index}
+                    result={result}
+                    searchPath={searchPath}
+                  />
+                ))
+              : null}
+          </ul>
+        </StyledContentLoader>
         <footer>
           <FooterResultPage />
         </footer>
       </SearchAside>
       <div></div>
-      <ToFromMap />
+
+      <StyledContentLoader isLoading={isLoading}>
+        <ToFromMap />
+      </StyledContentLoader>
     </>
   );
 }

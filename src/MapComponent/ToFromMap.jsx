@@ -44,6 +44,7 @@ export default function ToFromMap() {
   );
 
   if (
+    !searchResult ||
     searchResult.length === 0 ||
     !firstCoordinate ||
     mapCenterCoordinates.length === 0
